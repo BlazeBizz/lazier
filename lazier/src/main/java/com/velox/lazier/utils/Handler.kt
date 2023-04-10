@@ -68,7 +68,7 @@ fun <T, O> handleNetworkResponse(
         } catch (e: IOException) {
             e.message?.let { emit(NetworkResource.Error(it)) }
         } catch (e: HttpException) {
-            e.message?.let { emit(NetworkResource.Error(it)) }
+            emit(NetworkResource.Error( e.message(), e.response()?.getJSONObject(), e.code()))
         } catch (e: IllegalStateException) {
             e.message?.let { emit(NetworkResource.Error(it)) }
         } catch (e: NullPointerException) {
@@ -142,7 +142,7 @@ fun <T>  Response<T>.handleNetworkResponse(): Flow<NetworkResource<T>> {
         } catch (e: IOException) {
             e.message?.let { emit(NetworkResource.Error(it)) }
         } catch (e: HttpException) {
-            e.message?.let { emit(NetworkResource.Error(it)) }
+            emit(NetworkResource.Error( e.message(), e.response()?.getJSONObject(), e.code()))
         } catch (e: IllegalStateException) {
             e.message?.let { emit(NetworkResource.Error(it)) }
         } catch (e: NullPointerException) {
@@ -160,6 +160,8 @@ fun <T>  Response<T>.handleNetworkResponse(): Flow<NetworkResource<T>> {
 /**
  * [handleFlow] takes the response from use case function as Resource<> with in Main Coroutine Scope
  * return the extracted response with in onLoading(),onFailure(),onSuccess()
+ *
+ * Run Inside CoroutineScope(Dispatchers.IO)
  * **/
 fun <T> handleFlow(
     response: Flow<NetworkResource<T>>,
@@ -256,6 +258,10 @@ fun <T>  Call<T>.handleNetworkCall(): Flow<NetworkResource<T>> {
             code = e.code()
             val message = e.message()
             emit(NetworkResource.Error(message, errorBody, code))
+        } catch (e: IllegalStateException) {
+            e.message?.let { emit(NetworkResource.Error(it)) }
+        } catch (e: NullPointerException) {
+            e.message?.let { emit(NetworkResource.Error(it)) }
         } catch (e: Exception) {
             e.message?.let { emit(NetworkResource.Error(it)) }
         }
