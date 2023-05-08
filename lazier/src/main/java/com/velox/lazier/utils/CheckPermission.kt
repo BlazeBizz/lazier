@@ -2,28 +2,18 @@ package com.velox.lazier.utils
 
 import android.content.Context
 import android.content.pm.PackageManager
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.platform.LocalContext
-import androidx.core.content.ContextCompat
 
 
-fun checkForPermission(permission: String, context: Context): Boolean =
+fun String.checkForPermission(context: Context): Boolean = try {
     context.packageManager.checkPermission(
-        permission, context.packageName
+        this, context.packageName
     ) == PackageManager.PERMISSION_GRANTED
-
-@Composable
-fun checkForPermission(permission: String): Boolean {
-    val context = LocalContext.current
-    return (ContextCompat.checkSelfPermission(
-        context, permission
-    ) == PackageManager.PERMISSION_GRANTED)
+} catch (e: Exception) {
+    false
 }
 
-@Composable
+
+/*
 fun ComposablePermissionRequest(
     permission: String,
     onGranted: () -> Unit = {},
@@ -55,4 +45,4 @@ fun ComposablePermissionRequest(
             requestPermissionLauncher.launch(permission)
         }
     }
-}
+}*/

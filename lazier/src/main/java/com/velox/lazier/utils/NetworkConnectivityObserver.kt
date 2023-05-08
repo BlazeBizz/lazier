@@ -1,3 +1,4 @@
+/*
 package com.velox.lazier.utils
 
 import android.content.Context
@@ -115,4 +116,4 @@ private interface ConnectivityObserver {
     enum class Status {
         Available, Unavailable, Losing, Lost
     }
-}
+}*/

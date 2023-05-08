@@ -1,6 +1,7 @@
 package com.velox.lazier.utils
 
 import android.annotation.SuppressLint
+import com.google.gson.JsonSyntaxException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -74,6 +75,8 @@ fun <T, O> handleNetworkResponse(
         } catch (e: NullPointerException) {
             e.message?.let { emit(NetworkResource.Error(it)) }
         } catch (e: Exception) {
+            e.message?.let { emit(NetworkResource.Error(it)) }
+        }catch (e: JsonSyntaxException) {
             e.message?.let { emit(NetworkResource.Error(it)) }
         }
         emit(NetworkResource.Loading(false))
