@@ -1,6 +1,7 @@
 package com.velox.lazeir.utils.outlet
 
 import android.content.Context
+import androidx.annotation.Keep
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
@@ -29,6 +30,7 @@ onUnAvailable = {})
  *
  * it returns  "Available, Unavailable, Losing, Lost" state on connectivity change in the above functions respectively
  * **/
+@Keep
 @OptIn(ExperimentalCoroutinesApi::class)
 fun internetConnectivityListener(
     lifecycleScope: LifecycleCoroutineScope,

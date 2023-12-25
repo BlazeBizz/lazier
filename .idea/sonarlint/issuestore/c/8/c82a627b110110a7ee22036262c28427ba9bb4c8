@@ -1,0 +1,14 @@
+
+>kotlin:S125Å"Remove this commented out code.(ıòı8ÃŸĞÉ1
+Ckotlin:S125Ì"Remove this commented out code.(ê¥ƒúÿÿÿÿ8ÃŸĞÉ1
+<kotlin:S6310Ÿ"Avoid hardcoded dispatchers.(Í¡·Ş8ËŸĞÉ1
+<kotlin:S6310¥"Avoid hardcoded dispatchers.(Í¡·Ş8ËŸĞÉ1
+<kotlin:S6310¬"Avoid hardcoded dispatchers.(Í¡·Ş8ËŸĞÉ1
+qkotlin:S6311Ÿ"QRemove this dispatcher. It is pointless when used with only suspending functions.(Í¡·Ş8ÎŸĞÉ1
+qkotlin:S6311¥"QRemove this dispatcher. It is pointless when used with only suspending functions.(Í¡·Ş8ÎŸĞÉ1
+qkotlin:S6311¬"QRemove this dispatcher. It is pointless when used with only suspending functions.(Í¡·Ş8ÎŸĞÉ1
+mkotlin:S1192B"IDefine a constant instead of duplicating this literal "Time Out" 6 times.(õ“ø§ùÿÿÿÿ8íŸĞÉ1
+qkotlin:S3776"RRefactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.(æ¡¯ö8òŸĞÉ1
+vkotlin:S3776V"RRefactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.(¬Çõıÿÿÿÿ8òŸĞÉ1
+wkotlin:S3776¸"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(¯¹íÿÿÿÿÿ8òŸĞÉ1
+fkotlin:S6510Â"AMove "return" statements from all branches before "if" statement.(Î…ô·ùÿÿÿÿ8ûŸĞÉ1

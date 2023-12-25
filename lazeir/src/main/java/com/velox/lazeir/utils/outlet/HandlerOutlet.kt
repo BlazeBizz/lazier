@@ -3,6 +3,8 @@ package com.velox.lazeir.utils.outlet
 import android.annotation.SuppressLint
 import com.velox.lazeir.utils.handler
 import com.velox.lazeir.utils.handler.NetworkResource
+import com.velox.lazeir.utils.handler.handleNetworkResponseInternal
+import io.ktor.client.statement.HttpResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -13,9 +15,9 @@ import retrofit2.Response
 
 
 fun <T, O> handleNetworkResponse(
-    call: suspend () -> Response<T>,timeOut: Long = 10000L, mapFun: (it: T) -> O
+    call: suspend () -> Response<T>,/*timeOut: Long = 10000L*/ mapFun: (it: T) -> O
 ): Flow<NetworkResource<O>> {
-    return handler.handleNetworkResponse(call, mapFun, timeOut)
+    return handler.handleNetworkResponse(call, mapFun/*, timeOut*/)
 }
 
 /**
@@ -34,8 +36,8 @@ fun <T, O> handleNetworkResponse(
  *      }
  *
  * */
-fun <T> Response<T>.handleNetworkResponse(timeOut: Long = 10000L): Flow<NetworkResource<T>> {
-    return handler.handleNetworkResponse(this,  timeOut)
+fun <T> Response<T>.handleNetworkResponse(/*timeOut: Long = 10000L*/): Flow<NetworkResource<T>> {
+    return handler.handleNetworkResponse(this  /*timeOut*/)
 }
 
 
@@ -57,14 +59,34 @@ suspend fun <T> Flow<NetworkResource<T>>.handleFlowWithScope(
     onFailure: suspend (it: String, errorObject: JSONObject, code: Int) -> Unit,
     onSuccess: suspend (it: T) -> Unit
 ) {
-     CoroutineScope(Dispatchers.IO).launch {
+    CoroutineScope(Dispatchers.IO).launch {
         return@launch handler.handleFlow(this@handleFlowWithScope, onLoading, onFailure, onSuccess)
     }
 }
 
 
 @SuppressLint("LogNotTimber")
-fun <T> Call<T>.handleNetworkCall(timeOut: Long = 10000L): Flow<NetworkResource<T>> {
-    return handler.handleNetworkCall(this,timeOut)
+fun <T> Call<T>.handleNetworkCall(/*timeOut: Long = 10000L*/): Flow<NetworkResource<T>> {
+    return handler.handleNetworkCall(this/*timeOut*/)
 }
+
+/**
+ * [handleNetworkResponse] handel the ktor request
+ *
+ *
+ * usage:-
+ *
+ *
+ * fun requestedFeature(request: Request): Flow<NetworkResult<Request>> {
+ *
+ *         return [handleNetworkResponse] {
+ *             httpClient.post(urlString = "https://www.google.com/") {
+ *                 setBody(body = request)
+ *             }
+ *         }
+ *     }
+ * **/
+inline fun <reified T> handleNetworkResponse(crossinline call: suspend () -> HttpResponse): Flow<NetworkResource<T>> =
+    handleNetworkResponseInternal(call)
+
 

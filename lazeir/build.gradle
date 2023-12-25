@@ -16,7 +16,7 @@ android {
         kotlinCompilerExtensionVersion '1.2.0'
     }
     defaultConfig {
-        minSdk 24
+        minSdk 26
         targetSdk 33
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -25,7 +25,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -73,9 +73,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.10'
 
 //    //moshi
-    implementation 'com.squareup.moshi:moshi:1.13.0'
-    implementation 'com.squareup.moshi:moshi-kotlin:1.13.0'
-    kapt "com.squareup.moshi:moshi-kotlin-codegen:1.13.0"
+    implementation 'com.squareup.moshi:moshi:1.14.0'
+    implementation 'com.squareup.moshi:moshi-kotlin:1.14.0'
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:1.14.0"
     implementation 'com.google.android.gms:play-services-location:21.0.1'
 
     // Dagger & Hilt
@@ -86,6 +86,19 @@ dependencies {
     implementation 'androidx.hilt:hilt-navigation-fragment:1.0.0'
 
 
+    implementation "io.ktor:ktor-client-core:2.2.4"
+    implementation "io.ktor:ktor-client-serialization:2.2.4"
+    implementation "io.ktor:ktor-client-auth:2.2.4"
+    implementation "io.ktor:ktor-client-content-negotiation:2.2.4"
+    implementation "io.ktor:ktor-client-android:2.2.4"
+    implementation "io.ktor:ktor-client-logging-jvm:2.2.4"
+    implementation "io.ktor:ktor-serialization-gson:2.2.4"
+    implementation "io.ktor:ktor-serialization-kotlinx-json:2.2.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1"
+    implementation "io.ktor:ktor-client-cio:2.2.4"
+    implementation "io.ktor:ktor-client-okhttp:2.2.4"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3"
 
 
 

@@ -1,6 +1,7 @@
 package com.velox.lazeir.utils.handler
 
 import android.annotation.SuppressLint
+import io.ktor.client.statement.HttpResponse
 import kotlinx.coroutines.flow.Flow
 import org.json.JSONObject
 import retrofit2.Call
@@ -8,12 +9,12 @@ import retrofit2.Response
 
 interface HandlerInterface {
     fun <T, O> handleNetworkResponse(
-        call: suspend () -> Response<T>, mapFun: (it: T) -> O, timeOut: Long
+        call: suspend () -> Response<T>, mapFun: (it: T) -> O/*, timeOut: Long*/
     ): Flow<NetworkResource<O>>
 
 
     fun <T> handleNetworkResponse(
-        response: Response<T>, timeOut: Long
+        response: Response<T>/*, timeOut: Long*/
     ): Flow<NetworkResource<T>>
 
 
@@ -27,9 +28,7 @@ interface HandlerInterface {
 
     @SuppressLint("LogNotTimber")
     fun <T> handleNetworkCall(
-        call: Call<T>, timeOut: Long
+        call: Call<T>/*, timeOut: Long*/
     ): Flow<NetworkResource<T>>
 
-
-//cr velox
 }

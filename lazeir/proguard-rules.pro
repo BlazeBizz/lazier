@@ -19,3 +19,26 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keepattributes *Annotation*
+
+-keep class com.velox.lazeir.utils.*
+#-dontshrink class com.velox.lazeir.utils.*
+#-dontoptimize class com.velox.lazeir.utils.*
+
+-dontobfuscate class com.velox.lazeir.utils.outlet.*
+
+
+#-dontwarn com.squareup.retrofit2.*
+#-dontwarn com.squareup.okhttp3.*
+#-dontwarn com.jakewharton.retrofit.*
+#-dontwarn org.conscrypt.*
+#-dontwarn com.squareup.retrofit2.*
+#-dontwarn com.google.code.gson.*
+#-dontwarn com.squareup.moshi.*
+#-dontwarn com.google.android.gms.*
+#-dontwarn com.google.dagger.*
+#-dontwarn androidx.hilt.*
+#-dontwarn com.google.dagger.*
+#-dontwarn androidx.hilt.*
+#-dontwarn androidx.hilt.*
