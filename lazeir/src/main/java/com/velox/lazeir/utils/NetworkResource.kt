@@ -1,4 +1,4 @@
-package com.velox.lazeir.utils.handler
+package com.velox.lazeir.utils
 
 import org.json.JSONObject
 

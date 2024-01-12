@@ -1,5 +1,6 @@
 package com.velox.lazeir.utils.handler
 
+import com.velox.lazeir.utils.NetworkResource
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.RedirectResponseException
@@ -12,25 +13,49 @@ import org.apache.http.conn.ConnectTimeoutException
 import java.io.IOException
 import java.net.SocketTimeoutException
 
-inline fun <reified T> handleNetworkResponseInternal(crossinline call: suspend () -> HttpResponse): Flow<NetworkResource<T>> {
+inline fun <reified T> handleNetworkKtorResponseInternal(crossinline call: suspend () -> HttpResponse): Flow<NetworkResource<T>> {
     return flow {
         emit(NetworkResource.Loading(isLoading = true))
         try {
             val response = call.invoke().body<T>()
             emit(NetworkResource.Success(response))
         } catch (e: ClientRequestException) {
-            emit(NetworkResource.Error("ClientRequestException",e.response.body(),e.response.status.value ))
+            emit(
+                NetworkResource.Error(
+                    "ClientRequestException",
+                    e.response.body(),
+                    e.response.status.value
+                )
+            )
 
         } catch (e: ServerResponseException) {
 
-            emit(NetworkResource.Error("ServerResponseException",e.response.body(),e.response.status.value ))
+            emit(
+                NetworkResource.Error(
+                    "ServerResponseException",
+                    e.response.body(),
+                    e.response.status.value
+                )
+            )
 
         } catch (e: RedirectResponseException) {
 
-            emit(NetworkResource.Error("RedirectResponseException",e.response.body(),e.response.status.value ))
+            emit(
+                NetworkResource.Error(
+                    "RedirectResponseException",
+                    e.response.body(),
+                    e.response.status.value
+                )
+            )
 
-        }catch (e: ResponseException) {
-            emit(NetworkResource.Error("ResponseException",e.response.body(),e.response.status.value ))
+        } catch (e: ResponseException) {
+            emit(
+                NetworkResource.Error(
+                    "ResponseException",
+                    e.response.body(),
+                    e.response.status.value
+                )
+            )
 
         } catch (e: ConnectTimeoutException) {
 

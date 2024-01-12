@@ -1,6 +1,5 @@
 package com.velox.lazeir.utils
 
-import android.content.Context
 import com.velox.lazeir.utils.conveter.ConverterImpl
 import com.velox.lazeir.utils.conveter.ConverterInterface
 import com.velox.lazeir.utils.handler.HandlerImpl

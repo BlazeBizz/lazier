@@ -27,7 +27,9 @@ import java.net.SocketTimeoutException
 import java.util.concurrent.TimeoutException
 
 class HandlerImpl : HandlerInterface {
-    *//**
+    */
+
+/**
      * [handleNetworkResponse] handle the API response,
      * convert the dto response to domain response
      * extracting the error according to the error code
@@ -250,6 +252,7 @@ package com.velox.lazeir.utils.handler
 
 import android.annotation.SuppressLint
 import com.google.gson.JsonSyntaxException
+import com.velox.lazeir.utils.NetworkResource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -366,7 +369,7 @@ class HandlerImpl : HandlerInterface {
      * return the extracted response with in onLoading(),onFailure(),onSuccess()
      * Call within IO Scope
      * **/
-    override suspend fun <T> handleFlow(
+    override fun <T> handleFlow(
         flow: Flow<NetworkResource<T>>,
         onLoading: suspend (it: Boolean) -> Unit,
         onFailure: suspend (it: String, errorObject: JSONObject, code: Int) -> Unit,

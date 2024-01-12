@@ -1,6 +1,7 @@
 package com.velox.lazeir.utils.handler
 
 import android.annotation.SuppressLint
+import com.velox.lazeir.utils.NetworkResource
 import io.ktor.client.statement.HttpResponse
 import kotlinx.coroutines.flow.Flow
 import org.json.JSONObject
@@ -18,7 +19,7 @@ interface HandlerInterface {
     ): Flow<NetworkResource<T>>
 
 
-    suspend fun <T> handleFlow(
+    fun <T> handleFlow(
         flow: Flow<NetworkResource<T>>,
         onLoading: suspend (it: Boolean) -> Unit,
         onFailure: suspend (it: String, errorObject: JSONObject, code: Int) -> Unit,

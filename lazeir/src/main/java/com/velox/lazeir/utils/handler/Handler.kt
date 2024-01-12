@@ -230,7 +230,7 @@ fun <T> Call<T>.handleNetworkCall(): Flow<NetworkResource<T>> {
 
 //cr velox
 
-internal suspend fun <T> Call<T>.awaitHandler(): Response<T> = suspendCoroutine { continuation ->
+suspend inline fun <T> Call<T>.awaitHandler(): Response<T> = suspendCoroutine { continuation ->
     val callback = object : Callback<T> {
         override fun onResponse(call: Call<T>, response: Response<T>) {
             continuation.resume(response)
@@ -241,7 +241,7 @@ internal suspend fun <T> Call<T>.awaitHandler(): Response<T> = suspendCoroutine 
     enqueue(callback)
 }
 
-internal fun Response<*>.getJSONObject(): JSONObject? {
+fun Response<*>.getJSONObject(): JSONObject? {
     return try {
         errorBody()?.string()?.let { JSONObject(it) }
     } catch (exception: Exception) {
